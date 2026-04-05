@@ -170,7 +170,7 @@ Model yang digunakan:
 - Progress
 
 📸  
-![Category](screenshoot/django2_category.png)
+![Category](screenshoot/django2_category.jpg)
 
 ---
 
@@ -178,43 +178,43 @@ Model yang digunakan:
 
 ## 🔹 Admin Dashboard
 📸  
-![Admin](screenshoot/django2_admin.png)
+![Admin](screenshoot/django2_admin.jpg)
 
 ---
 
 ## 🔹 Course List
 📸  
-![Course](screenshoot/django2_pythonbasic1.png)
+![Course](screenshoot/django2_pythonbasic1.jpg)
 
 ---
 
 ## 🔹 Detail Course
 📸  
-![Detail](screenshoot/django2_pythonbasic2.png)
+![Detail](screenshoot/django2_pythonbasic2.jpg)
 
 ---
 
 ## 🔹 Lesson (Inline)
 📸  
-![Lesson](screenshoot/django2_lessons1.png)
+![Lesson](screenshoot/django2_lessons1.jpg)
 
 ---
 
 ## 🔹 User Role
 📸  
-![User](screenshoot/django2_user.png)
+![User](screenshoot/django2_user.jpg)
 
 ---
 
 ## 🔹 Enrollment
 📸  
-![Enrollment](screenshoot/django2_enrollments.png)
+![Enrollment](screenshoot/django2_enrollments.jpg)
 
 ---
 
 ## 🔹 Progress
 📸  
-![Progress](screenshoot/django2_progress.png)
+![Progress](screenshoot/django2_progress.jpg)
 
 ---
 
