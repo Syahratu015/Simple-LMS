@@ -196,7 +196,7 @@ Model yang digunakan:
 
 ## 🔹 Lesson (Inline)
 📸  
-![Lesson](screenshoot/django2_lessons1.jpg)
+![Lesson](screenshoot/django2_lessons.jpg)
 
 ---
 
