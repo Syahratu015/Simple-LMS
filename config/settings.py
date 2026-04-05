@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 
@@ -10,6 +9,11 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
+
+# ======================
+# INSTALLED APPS
+# ======================
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,7 +21,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'lms',   # ← TAMBAHKAN INI
 ]
+
+
+# ======================
+# MIDDLEWARE
+# ======================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -29,7 +40,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
+
 ROOT_URLCONF = 'config.urls'
+
+
+# ======================
+# TEMPLATES
+# ======================
 
 TEMPLATES = [
     {
@@ -46,7 +63,13 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'config.wsgi.application'
+
+
+# ======================
+# DATABASE
+# ======================
 
 DATABASES = {
     'default': {
@@ -59,7 +82,24 @@ DATABASES = {
     }
 }
 
+
+# ======================
+# STATIC FILE
+# ======================
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+
+# ======================
+# DEFAULT FIELD
+# ======================
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# ======================
+# CUSTOM USER MODEL
+# ======================
+
+AUTH_USER_MODEL = 'lms.User'

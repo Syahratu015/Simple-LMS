@@ -149,6 +149,85 @@ simple-lms/
 ---
 
 
+## PROGRESS 2
+
+# 📚 Simple LMS - Progress 2  
+## Database Design & ORM Implementation
+
+## 📌 Deskripsi
+Pada progress ini dilakukan perancangan database LMS menggunakan Django ORM, termasuk relasi antar model, optimasi query, dan penggunaan Django Admin.
+
+---
+
+# 🎯 Data Models
+
+Model yang digunakan:
+- User (admin, instructor, student)
+- Category (hierarchy)
+- Course
+- Lesson
+- Enrollment
+- Progress
+
+📸  
+![Category](screenshoot/django2_category.png)
+
+---
+
+# 🔗 Tampilan Admin
+
+## 🔹 Admin Dashboard
+📸  
+![Admin](screenshoot/django2_admin.png)
+
+---
+
+## 🔹 Course List
+📸  
+![Course](screenshoot/django2_pythonbasic1.png)
+
+---
+
+## 🔹 Detail Course
+📸  
+![Detail](screenshoot/django2_pythonbasic2.png)
+
+---
+
+## 🔹 Lesson (Inline)
+📸  
+![Lesson](screenshoot/django2_lessons1.png)
+
+---
+
+## 🔹 User Role
+📸  
+![User](screenshoot/django2_user.png)
+
+---
+
+## 🔹 Enrollment
+📸  
+![Enrollment](screenshoot/django2_enrollments.png)
+
+---
+
+## 🔹 Progress
+📸  
+![Progress](screenshoot/django2_progress.png)
+
+---
+
+# ⚡ Query Optimization
+
+```python
+def for_listing(self):
+    return self.select_related('instructor','category')\
+               .prefetch_related('lessons')
+
+def for_student_dashboard(self):
+    return self.select_related('student','course')\
+               .prefetch_related('progress','course__lessons')
 
 # 👨 Author
 
