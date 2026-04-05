@@ -208,7 +208,7 @@ Model yang digunakan:
 
 ## 🔹 Enrollment
 📸  
-![Enrollment](screenshoot/django2_enrollments.jpg)
+![Enrollment](screenshoot/django_enrollments.jpg)
 
 ---
 
