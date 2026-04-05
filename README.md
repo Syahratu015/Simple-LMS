@@ -199,6 +199,8 @@ Model yang digunakan:
 ## 🔹 Lesson (Inline)
 📸  
 ![Lesson](screenshoot/django_lessons.jpg)
+![Lesson](screenshoot/django_lessons2.jpg)
+
 
 ---
 
@@ -211,6 +213,7 @@ Model yang digunakan:
 ## 🔹 Enrollment
 📸  
 ![Enrollment](screenshoot/django_enrollments.jpg)
+![Enrollment](screenshoot/django_enrollments2.jpg)
 
 ---
 
