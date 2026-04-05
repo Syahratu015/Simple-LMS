@@ -184,7 +184,9 @@ Model yang digunakan:
 
 ## 🔹 Course List
 📸  
-![Course](screenshoot/django2_pythonbasic1.jpg)
+![Course](screenshoot/django2_course.jpg)
+
+![Course](screenshoot/django2_pythonbasic.jpg)
 
 ---
 
