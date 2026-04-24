@@ -4,7 +4,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY", "django-secret-key")
-
 DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
@@ -13,7 +12,6 @@ ALLOWED_HOSTS = ["*"]
 # ======================
 # INSTALLED APPS
 # ======================
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,15 +20,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'lms',   # ← TAMBAHKAN INI
+    'corsheaders',
+    'ninja',
+
+    'accounts',
+    'courses',
+    'enroll',
 ]
 
 
 # ======================
 # MIDDLEWARE
 # ======================
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -41,13 +44,15 @@ MIDDLEWARE = [
 ]
 
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 ROOT_URLCONF = 'config.urls'
 
 
 # ======================
 # TEMPLATES
 # ======================
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,23 +75,37 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # ======================
 # DATABASE
 # ======================
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('POSTGRES_HOST'),
-        'PORT': os.getenv('POSTGRES_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
 
 # ======================
+# AUTH
+# ======================
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+]
+
+
+# ======================
+# INTERNATIONALIZATION
+# ======================
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Asia/Jakarta'
+USE_TZ = True
+
+
+# ======================
 # STATIC FILE
 # ======================
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -94,12 +113,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # ======================
 # DEFAULT FIELD
 # ======================
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# ======================
-# CUSTOM USER MODEL
-# ======================
-
-AUTH_USER_MODEL = 'lms.User'

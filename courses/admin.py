@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import User, Category, Course, Lesson, Enrollment, Progress
+from django.db.models import Count
+from .models import Course, Lesson, Category, Enrollment, Progress
 
 
 # ========================
@@ -29,40 +30,39 @@ class ProgressInline(admin.TabularInline):
 class CourseAdmin(admin.ModelAdmin):
 
     def total_lessons(self, obj):
-        return obj.lesson_set.count()
+        return obj.total_lessons
     total_lessons.short_description = "Lessons"
 
     list_display = (
-        'title',
-        'instructor',
-        'category',
-        'total_lessons',
-        'created_at'
+        "title",
+        "instructor",
+        "category",
+        "total_lessons",
+        "created_at"
     )
 
-    ordering = ('-created_at',)
-
     search_fields = (
-        'title',
-        'description',
-        'instructor__username'
+        "title",
+        "description",
+        "instructor__username"
     )
 
     list_filter = (
-        'category',
-        'instructor'
+        "category",
+        "instructor"
     )
 
-    date_hierarchy = 'created_at'
+    ordering = ("-created_at",)
+    date_hierarchy = "created_at"
 
     inlines = [LessonInline]
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related(
-            'instructor',
-            'category'
-        ).prefetch_related(
-            'lesson_set'
+            "instructor",
+            "category"
+        ).annotate(
+            total_lessons=Count("lessons")
         )
 
 
@@ -79,16 +79,10 @@ class CategoryAdmin(admin.ModelAdmin):
         return obj.name
     full_path.short_description = "Category"
 
-    list_display = (
-        'full_path',
-        'parent'
-    )
-
-    ordering = ('name',)
-
-    search_fields = ('name',)
-
-    list_filter = ('parent',)
+    list_display = ("full_path", "parent")
+    search_fields = ("name",)
+    list_filter = ("parent",)
+    ordering = ("name",)
 
 
 # ========================
@@ -98,29 +92,16 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
 
-    list_display = (
-        'title',
-        'course',
-        'order'
-    )
+    list_display = ("title", "course", "order")
 
-    ordering = (
-        'course',
-        'order'
-    )
+    search_fields = ("title",)
 
-    search_fields = (
-        'title',
-    )
+    list_filter = ("course",)
 
-    list_filter = (
-        'course',
-    )
+    ordering = ("course", "order")
 
     def get_queryset(self, request):
-        return super().get_queryset(request).select_related(
-            'course'
-        )
+        return super().get_queryset(request).select_related("course")
 
 
 # ========================
@@ -139,34 +120,33 @@ class EnrollmentAdmin(admin.ModelAdmin):
     progress_percentage.short_description = "Progress"
 
     list_display = (
-        'student',
-        'course',
-        'progress_percentage',
-        'enrolled_at'
+        "student",
+        "course",
+        "progress_percentage",
+        "enrolled_at"
     )
 
-    ordering = ('-enrolled_at',)
-
     search_fields = (
-        'student__username',
-        'course__title'
+        "student__username",
+        "course__title"
     )
 
     list_filter = (
-        'course',
-        'enrolled_at'
+        "course",
+        "enrolled_at"
     )
 
-    date_hierarchy = 'enrolled_at'
+    ordering = ("-enrolled_at",)
+    date_hierarchy = "enrolled_at"
 
     inlines = [ProgressInline]
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related(
-            'student',
-            'course'
+            "student",
+            "course"
         ).prefetch_related(
-            'progress_set__lesson'
+            "progress_set__lesson"
         )
 
 
@@ -178,51 +158,23 @@ class EnrollmentAdmin(admin.ModelAdmin):
 class ProgressAdmin(admin.ModelAdmin):
 
     list_display = (
-        'enrollment',
-        'lesson',
-        'completed',
-        'completed_at'
+        "enrollment",
+        "lesson",
+        "completed",
+        "completed_at"
     )
-
-    ordering = ('-completed_at',)
-
-    list_filter = ('completed',)
 
     search_fields = (
-        'lesson__title',
-        'enrollment__student__username'
+        "lesson__title",
+        "enrollment__student__username"
     )
+
+    list_filter = ("completed",)
+
+    ordering = ("-completed_at",)
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related(
-            'enrollment',
-            'lesson'
+            "enrollment",
+            "lesson"
         )
-
-
-# ========================
-# User Admin
-# ========================
-
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-
-    list_display = (
-        'username',
-        'email',
-        'role',
-        'is_active',
-        'is_staff'
-    )
-
-    ordering = ('username',)
-
-    list_filter = (
-        'role',
-        'is_active'
-    )
-
-    search_fields = (
-        'username',
-        'email'
-    )
