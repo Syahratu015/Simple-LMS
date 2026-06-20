@@ -101,10 +101,10 @@ Lesson → ordered per course
 Enrollment → relasi student–course (unique)
 Progress → tracking lesson completion
 
-### Screenshots
+### screenshoot
 
 Query Demo
-![Django QueryDemo](Screenshots/querydemo.png)
+![Django QueryDemo](screenshoot/querydemo.png)
 =======
 <<<<<<< HEAD
 Kenapa perlu volume untuk MySQL?
@@ -191,7 +191,7 @@ Flow Sistem
 Register → Login → Get Token → Akses API
 
 Screenshot Swagger
-![Swagger](Screenshots/swagger.png)
+![Swagger](screenshoot/swagger.png)
 =======
 
 # Simple LMS - Progress 4: Advanced Features & Integration
@@ -313,7 +313,7 @@ Password : guest
 
 ### Docker Compose Services
 
-![Docker Compose](Screenshots/docker-compose-ps.png)
+![Docker Compose](screenshoot/docker-compose-ps.png)
 
 Menampilkan seluruh service berhasil berjalan.
 
@@ -321,7 +321,7 @@ Menampilkan seluruh service berhasil berjalan.
 
 ### Redis Cache
 
-![Redis Cache](Screenshots/redis-cache.png)
+![Redis Cache](screenshoot/redis-cache.png)
 
 ```json
 {
@@ -333,7 +333,7 @@ Menampilkan seluruh service berhasil berjalan.
 
 ### MongoDB Activity Logs
 
-![Activity Logs](Screenshots/activity-logs.png)
+![Activity Logs](screenshoot/activity-logs.png)
 
 Menyimpan aktivitas pengguna seperti Create, Update, dan Delete Course.
 
@@ -341,12 +341,12 @@ Menyimpan aktivitas pengguna seperti Create, Update, dan Delete Course.
 
 ### Rate Limit
 
-![Rate Limit](Screenshots/ratelimit1.png)
-![Rate Limit](Screenshots/ratelimit2.png)
+![Rate Limit](screenshoot/ratelimit1.png)
+![Rate Limit](screenshoot/ratelimit2.png)
 
 ### Celery Task Execution
 
-![Celery Task](Screenshots/logs-celery-worker.png)
+![Celery Task](screenshoot/logs-celery-worker.png)
 
 Menampilkan task berhasil diproses secara asynchronous.
 
@@ -355,7 +355,7 @@ Menampilkan task berhasil diproses secara asynchronous.
 
 ### Flower Monitoring
 
-![Flower](Screenshots/flower-dashboard.png)
+![Flower](screenshoot/flower-dashboard.png)
 
 Monitoring task dan worker Celery.
 
