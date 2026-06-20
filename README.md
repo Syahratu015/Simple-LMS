@@ -17,7 +17,6 @@ DB_HOST=db
 DB_PORT=5432
 
 ![Django Home](Screenshots/homedjango.png)
-![Django Admin](Screenshots/djangoadmin.png)
 
 Kenapa perlu volume untuk MySQL?
 Agar data database tetap tersimpan dan tidak hilang meskipun container dihentikan atau dihapus.
@@ -103,8 +102,6 @@ Enrollment → relasi student–course (unique)
 Progress → tracking lesson completion
 
 ### Screenshots
-Admin Dashboard
-![Django AdminDashboard](Screenshots/admin.png)
 
 Query Demo
 ![Django QueryDemo](Screenshots/querydemo.png)
