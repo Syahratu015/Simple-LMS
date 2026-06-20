@@ -16,7 +16,7 @@ DB_PASSWORD=postgres123
 DB_HOST=db
 DB_PORT=5432
 
-![Django Home](Screenshots/homedjango.png)
+![Django Home](screenshoot/homedjango.png)
 
 Kenapa perlu volume untuk MySQL?
 Agar data database tetap tersimpan dan tidak hilang meskipun container dihentikan atau dihapus.
