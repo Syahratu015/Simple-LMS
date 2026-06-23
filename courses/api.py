@@ -32,33 +32,48 @@ class CourseUpdateSchema(Schema):
 
 
 # ========================
-# LIST (PUBLIC) + REDIS CACHE
+# LIST (PUBLIC) + REDIS CACHE + SEARCH/FILTER/SORT
 # ========================
 @router.get("/")
 @ratelimit(key="ip", rate="60/m", block=True)
-def list_courses(request):
-    cache_key = "course_list"
-    cached_data = cache.get(cache_key)
+def list_courses(
+    request,
+    search: str = None,
+    category_id: int = None,
+    sort: str = None
+):
+    courses = Course.objects.all()
 
-    if cached_data:
-        return {
-            "source": "redis_cache",
-            "data": cached_data
-        }
+    if search:
+        courses = courses.filter(
+            title__icontains=search
+        )
 
-    courses = list(Course.objects.values(
-        "id",
-        "title",
-        "description"
-    ))
+    if category_id:
+        courses = courses.filter(
+            category_id=category_id
+        )
 
-    cache.set(cache_key, courses, timeout=300)
+    if sort == "title":
+        courses = courses.order_by("title")
+
+    elif sort == "-title":
+        courses = courses.order_by("-title")
+
+    elif sort == "newest":
+        courses = courses.order_by("-id")
+
+    result = list(
+        courses.values(
+            "id",
+            "title",
+            "description"
+        )
+    )
 
     return {
-        "source": "database",
-        "data": courses
+        "data": result
     }
-
 
 # ========================
 # DETAIL (PUBLIC) + REDIS CACHE
@@ -119,7 +134,7 @@ def create_course(request, data: CourseCreateSchema):
         progress=0
     )
 
-    cache.delete("course_list")
+    cache.clear()
 
     return {
         "id": course.id,
@@ -154,7 +169,7 @@ def update_course(request, course_id: int, data: CourseUpdateSchema):
         detail=f"Course ID {course_id} updated"
     )
 
-    cache.delete("course_list")
+    cache.clear()
     cache.delete(f"course_detail_{course_id}")
 
     return {
@@ -171,7 +186,7 @@ def update_course(request, course_id: int, data: CourseUpdateSchema):
 @require_role(["admin"])
 def delete_course(request, course_id: int):
     course = get_object_or_404(Course, id=course_id)
-    
+
     log_activity(
         user_id=request.auth.id,
         action="DELETE_COURSE",
@@ -180,7 +195,7 @@ def delete_course(request, course_id: int):
 
     course.delete()
 
-    cache.delete("course_list")
+    cache.clear()
     cache.delete(f"course_detail_{course_id}")
 
     return {"message": "Deleted successfully"}
