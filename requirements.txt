@@ -10,3 +10,4 @@ django-ratelimit
 python-dotenv
 django-ninja
 PyJWT
+pip install redis

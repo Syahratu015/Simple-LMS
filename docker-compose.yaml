@@ -1,10 +1,10 @@
 services:
   web:
     build: .
-    working_dir: /app/code
+    working_dir: /app/code/code
     command: sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ..:/app/code
+      - .:/app/code
     ports:
       - "8000:8000"
     env_file:
@@ -28,6 +28,8 @@ services:
 
   redis:
     image: redis:7
+    ports:
+      - "6380:6379"
 
   mongodb:
     image: mongo:7
@@ -42,10 +44,10 @@ services:
 
   celery-worker:
     build: .
-    working_dir: /app/code
+    working_dir: /app/code/code
     command: celery -A config worker -l info
     volumes:
-      - ..:/app/code
+      - .:/app/code
     env_file:
       - .env
     depends_on:
@@ -55,10 +57,10 @@ services:
 
   celery-beat:
     build: .
-    working_dir: /app/code
+    working_dir: /app/code/code
     command: celery -A config beat -l info
     volumes:
-      - ..:/app/code
+      - .:/app/code
     env_file:
       - .env
     depends_on:
@@ -68,10 +70,10 @@ services:
 
   flower:
     build: .
-    working_dir: /app/code
+    working_dir: /app/code/code
     command: celery -A config flower --port=5555
     volumes:
-      - ..:/app/code
+      - .:/app/code
     env_file:
       - .env
     ports:
